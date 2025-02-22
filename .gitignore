@@ -1,1 +1,5 @@
 unsloth_compiled_cache/
+wandb/
+outputs/
+*.jsonl
+last_run_prepared/
