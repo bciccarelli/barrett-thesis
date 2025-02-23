@@ -3,3 +3,4 @@ wandb/
 outputs/
 *.jsonl
 last_run_prepared/
+output.log
