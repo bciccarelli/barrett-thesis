@@ -8,28 +8,32 @@ load_in_4bit: false
 strict: false
 
 datasets:
-  - path: SALT-NLP/CultureBank
-    split: reddit
-    type:
-      system_prompt: "You are a cultural expert."
-      field_system:
-      field_instruction: eval_question
-      field_input:
-      field_output: eval_whole_desc
-      format: |-
-        ### Instruction:
-        {instruction}
-        
-        ### Input:
-        {input}
-        
-        ### Response:
-      no_input_format: |-
-        ### Instruction:
-        {instruction}
-        
-        ### Response:
+  - path: json
+    data_files: culture_shuffle.jsonl
+    split: train
+    type: alpaca
 
+  # - path: SALT-NLP/CultureBank
+  #   split: reddit
+  #   type:
+  #     system_prompt: "You are a cultural expert."
+  #     field_system:
+  #     field_instruction: eval_question
+  #     field_input:
+  #     field_output: eval_whole_desc
+  #     format: |-
+  #       ### Instruction:
+  #       {instruction}
+        
+  #       ### Input:
+  #       {input}
+        
+  #       ### Response:
+  #     no_input_format: |-
+  #       ### Instruction:
+  #       {instruction}
+        
+  #       ### Response:
 test_datasets:
   - path: json
     data_files:
@@ -51,37 +55,38 @@ test_datasets:
         ### Response (true or false):
 
 dataset_prepared_path:
-output_dir: ./outputs/llama-3.1-8b-lora
+# output_dir: ./outputs/llama-3.1-8b-lora
+output_dir: ./outputs/llama-3.1-8b-fft
 
 sequence_len: 4096
 sample_packing: true
 eval_sample_packing: true
 pad_to_sequence_len: true
 
-adapter: lora
-lora_model_dir:
-lora_r: 32
-lora_alpha: 16
-lora_dropout: 0.05
-lora_target_linear: true
-lora_fan_in_fan_out: false
-lora_modules_to_save:
-  - embed_tokens
-  - lm_head
+# adapter: lora
+# lora_model_dir:
+# lora_r: 32
+# lora_alpha: 16
+# lora_dropout: 0.05
+# lora_target_linear: true
+# lora_fan_in_fan_out: false
+# lora_modules_to_save:
+#   - embed_tokens
+#   - lm_head
 
 wandb_project: "Meta-Llama-3.1-8B_CultureBank_FineTuning"
 wandb_entity: "bcicc"
 wandb_watch: "all"
-wandb_name: "FineTuning_Run_01"
+wandb_name: "Full_FineTuning_Run_01"
 wandb_log_model: "checkpoint"
 
 gradient_accumulation_steps: 4
 micro_batch_size: 2
 eval_batch_size: 10
 num_epochs: 4
-optimizer: adamw_bnb_8bit
+optimizer: paged_adamw_8bit
 lr_scheduler: cosine
-learning_rate: 0.0002
+learning_rate: 2e-5
 
 train_on_inputs: false
 group_by_length: false
@@ -101,7 +106,7 @@ s2_attention:
 warmup_steps: 10
 eval_table_size:
 eval_max_new_tokens: 5
-evals_per_epoch: 4
+evals_per_epoch: 8
 saves_per_epoch: 1
 debug:
 deepspeed:

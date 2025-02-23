@@ -2,28 +2,26 @@ import re
 import torch
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
 import sys
 
 model_name = sys.argv[1]
 
 if model_name == "llama":
-    model_name = "NousResearch/Meta-Llama-3.1-8B"
-
+    base_model_name = "NousResearch/Meta-Llama-3.1-8B"
+    lora_weights_path = "outputs/llama-3.1-8b-lora"
 
 dataset_name = "kellycyy/CulturalBench"
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+base_model = AutoModelForCausalLM.from_pretrained(base_model_name, device_map="auto")
+
+model = PeftModel.from_pretrained(base_model, lora_weights_path)
 model.eval()
 
-gen_kwargs = {
-    "max_new_tokens": 10,
-    "do_sample": False,
-    "temperature": 0.0,
-    "eos_token_id": tokenizer.eos_token_id,
-}
 
 dataset = load_dataset(dataset_name, split="test")
+
 
 true_id = tokenizer("true", add_special_tokens=False).input_ids[0]
 false_id = tokenizer("false", add_special_tokens=False).input_ids[0]
