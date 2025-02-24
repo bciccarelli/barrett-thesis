@@ -1,7 +1,7 @@
 base_model: NousResearch/Meta-Llama-3.1-8B
 model_type: LlamaForCausalLM
 tokenizer_type: AutoTokenizer
-hub_model_id: bkciccar/custom_model_name
+hub_model_id: bkciccar/llama-3.1-8b-culture-lora
 
 load_in_8bit: false
 load_in_4bit: false
