@@ -3,7 +3,7 @@
 #SBATCH -N 1
 #SBATCH -c 4
 #SBATCH -G a100:1
-#SBATCH -t 5:00:00
+#SBATCH -t 12:00:00
 #SBATCH -p general      # partition 
 #SBATCH -q public       # QOS
 #SBATCH -o slurm.%j.out # file to save job's STDOUT (%j = JobId)
@@ -21,4 +21,4 @@ export HF_HOME=/scratch/bkciccar/huggingface
 export WANDB_CACHE_DIR=/scratch/bkciccar/wandb
 
 wandb login $WANDB_API_KEY
-axolotl train config.yml
+axolotl train config-mistral.yml

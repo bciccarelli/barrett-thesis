@@ -21,4 +21,4 @@ export HF_HOME=/scratch/bkciccar/huggingface
 export WANDB_CACHE_DIR=/scratch/bkciccar/wandb
 
 wandb login $WANDB_API_KEY
-axolotl train config-lora.yml
+axolotl train config-qwen.yml

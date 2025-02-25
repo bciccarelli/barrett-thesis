@@ -1,7 +1,7 @@
-base_model: NousResearch/Meta-Llama-3.1-8B
-model_type: LlamaForCausalLM
+base_model: mistralai/Mistral-7B-Instruct-v0.1
+model_type: AutoModelForCausalLM
 tokenizer_type: AutoTokenizer
-hub_model_id: bkciccar/llama-3.1-8b-culture-fft
+hub_model_id: bkciccar/mistral-7B-culture-fft
 
 load_in_8bit: false
 load_in_4bit: false
@@ -34,7 +34,7 @@ test_datasets:
         ### Response (true or false):
 
 dataset_prepared_path:
-output_dir: /scratch/bkciccar/outputs/llama-3.1-8b-fft
+output_dir: /scratch/bkciccar/outputs/mistral-7b-fft
 
 sequence_len: 4096
 sample_packing: true
@@ -44,8 +44,8 @@ pad_to_sequence_len: true
 wandb_project: "Meta-Llama-3.1-8B_CultureBank_FineTuning"
 wandb_entity: "bcicc"
 wandb_watch: "all"
-wandb_name: "Full_FineTuning_Run_02"
-wandb_log_model: "checkpoint"
+wandb_name: "Mistral_FFT_02"
+wandb_log_model: "end"
 
 gradient_accumulation_steps: 4
 micro_batch_size: 2
@@ -53,7 +53,7 @@ eval_batch_size: 10
 num_epochs: 4
 optimizer: paged_adamw_8bit
 lr_scheduler: cosine
-learning_rate: 2e-5
+learning_rate: 1e-5
 
 train_on_inputs: false
 group_by_length: false
@@ -74,7 +74,7 @@ warmup_steps: 10
 eval_table_size:
 eval_max_new_tokens: 5
 evals_per_epoch: 16
-saves_per_epoch: 4
+saves_per_epoch: 1
 debug:
 deepspeed:
 weight_decay: 0.0
