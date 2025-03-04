@@ -1,7 +1,7 @@
-base_model: Qwen/Qwen2-7B-Instruct
+base_model: Qwen/Qwen2.5-7B-Instruct
 model_type: AutoModelForCausalLM
 tokenizer_type: AutoTokenizer
-hub_model_id: bkciccar/qwen2-7b-instruct-culture-fft
+hub_model_id: bkciccar/qwen2.5-7b-instruct-culture-fft
 
 load_in_8bit: false
 load_in_4bit: false
@@ -34,7 +34,7 @@ test_datasets:
         ### Response (true or false):
 
 dataset_prepared_path:
-output_dir: /scratch/bkciccar/outputs/qwen2-7b-fft
+output_dir: /scratch/bkciccar/outputs/qwen2-5-7b-fft
 
 sequence_len: 4096
 sample_packing: true
@@ -44,7 +44,7 @@ pad_to_sequence_len: true
 wandb_project: "Meta-Llama-3.1-8B_CultureBank_FineTuning"
 wandb_entity: "bcicc"
 wandb_watch: "all"
-wandb_name: "Qwen_FFT_02"
+wandb_name: "Qwen_2_5_FFT_02"
 wandb_log_model: "end"
 
 gradient_accumulation_steps: 4
