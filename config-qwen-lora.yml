@@ -1,7 +1,7 @@
-base_model: NousResearch/Meta-Llama-3.1-8B-Instruct
-model_type: LlamaForCausalLM
+base_model: Qwen/Qwen2.5-7B-Instruct
+model_type: AutoModelForCausalLM
 tokenizer_type: AutoTokenizer
-hub_model_id: bkciccar/llama-3.1-8b-instruct-culture-lora
+hub_model_id: bkciccar/qwen2.5-7b-instruct-culture-lora
 
 load_in_8bit: false
 load_in_4bit: false
@@ -34,7 +34,7 @@ test_datasets:
         ### Response (true or false):
 
 dataset_prepared_path:
-output_dir: /scratch/bkciccar/outputs/llama-3.1-8b-lora
+output_dir: /scratch/bkciccar/outputs/qwen2-5-7b-lora
 
 sequence_len: 4096
 sample_packing: true
@@ -52,11 +52,11 @@ lora_modules_to_save:
   - embed_tokens
   - lm_head
 
-wandb_project: "Meta-Llama-3.1-8B_CultureBank_FineTuning"
+wandb_project: "CultureBank_FineTuning"
 wandb_entity: "bcicc"
-wandb_watch: "all"
-wandb_name: "Lora_FineTuning_Run_02"
-wandb_log_model: "checkpoint"
+wandb_watch:
+wandb_name: "Qwen_Lora_FineTuning_Run_01"
+wandb_log_model:
 
 gradient_accumulation_steps: 4
 micro_batch_size: 2
